@@ -7,7 +7,7 @@
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
       color: #fff;
       display: flex;
@@ -24,11 +24,7 @@
     }
     .slide {
       display: none;
-      animation: fade 1s ease-in-out;
-      padding: 20px;
-      border-radius: 15px;
-      background: rgba(0, 0, 0, 0.4);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+      animation: fade 0.8s ease-in-out;
     }
     .slide.active {
       display: block;
@@ -38,20 +34,24 @@
       margin-bottom: 15px;
       color: #00c6ff;
     }
-    p, ul {
-      font-size: 1.1rem;
-      line-height: 1.6;
-      text-align: left;
+    .subtitle {
+      margin-top: 20px;
+      padding: 12px 20px;
+      font-size: 1.2rem;
+      background: #00c6ff;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.3s;
     }
-    ul {
-      list-style: disc;
-      margin: 10px 0 0 30px;
-      text-align: left;
+    .subtitle:hover {
+      background: #0072ff;
     }
     .controls {
-      margin-top: 20px;
+      margin-top: 30px;
     }
-    button {
+    button.nav {
       background: #00c6ff;
       border: none;
       padding: 12px 20px;
@@ -62,7 +62,7 @@
       margin: 0 10px;
       transition: background 0.3s;
     }
-    button:hover {
+    button.nav:hover {
       background: #0072ff;
     }
     .progress {
@@ -79,9 +79,51 @@
       background: #00c6ff;
       transition: width 0.5s ease;
     }
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: #1e293b;
+      color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 600px;
+      text-align: left;
+      animation: zoom 0.4s ease;
+    }
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .close:hover {
+      color: #fff;
+    }
     @keyframes fade {
       from {opacity: 0; transform: translateY(20px);}
       to {opacity: 1; transform: translateY(0);}
+    }
+    @keyframes zoom {
+      from {transform: scale(0.7);}
+      to {transform: scale(1);}
+    }
+    small {
+      display: block;
+      margin-bottom: 15px;
+      color: #ccc;
     }
   </style>
 </head>
@@ -90,97 +132,68 @@
     <!-- 1 -->
     <div class="slide active">
       <h1>🧠 ¿Qué es IEEE?</h1>
-      <p>IEEE (Institute of Electrical and Electronics Engineers) es la mayor organización profesional técnica del mundo, dedicada al avance de la innovación en ingeniería, computación y tecnología para el beneficio global.</p>
+      <button class="subtitle" onclick="openModal('m1')">Ver información</button>
     </div>
     <!-- 2 -->
     <div class="slide">
-      <h1>🎓 ¿Quiénes pueden afiliarse como estudiantes?</h1>
-      <p>Pueden afiliarse estudiantes de pregrado o posgrado matriculados en instituciones reconocidas, en áreas como:</p>
-      <ul>
-        <li>Ingeniería (Software, Eléctrica, Electrónica, Mecánica, etc.)</li>
-        <li>Ciencias de la computación e informática</li>
-        <li>Tecnología aplicada y afines</li>
-      </ul>
-      <p>No se requiere experiencia profesional previa.</p>
+      <h1>🎓 ¿Quiénes pueden afiliarse?</h1>
+      <button class="subtitle" onclick="openModal('m2')">Ver información</button>
     </div>
     <!-- 3 -->
     <div class="slide">
-      <h1>🧭 Proceso de inscripción paso a paso</h1>
-      <ul>
-        <li>Crear una cuenta en el portal oficial de IEEE: <b>ieee.org</b></li>
-        <li>Seleccionar “Join IEEE” en el menú principal</li>
-        <li>Elegir la membresía “Student”</li>
-        <li>Ingresar los datos académicos (programa, universidad, país)</li>
-        <li>Confirmar la afiliación y realizar el pago correspondiente</li>
-        <li>Recibir confirmación por correo electrónico</li>
-      </ul>
+      <h1>🧭 Proceso de inscripción</h1>
+      <button class="subtitle" onclick="openModal('m3')">Ver información</button>
     </div>
     <!-- 4 -->
     <div class="slide">
       <h1>⭐ Beneficios clave</h1>
-      <ul>
-        <li>Acceso a publicaciones y estándares IEEE</li>
-        <li>Participación en capítulos técnicos (Robótica, Computación, Energía, etc.)</li>
-        <li>Networking internacional</li>
-        <li>Oportunidades de liderazgo estudiantil</li>
-        <li>Descuentos en eventos y certificaciones</li>
-      </ul>
+      <button class="subtitle" onclick="openModal('m4')">Ver información</button>
     </div>
     <!-- 5 -->
     <div class="slide">
       <h1>📍 Presencia en Colombia</h1>
-      <p>IEEE tiene ramas estudiantiles activas en universidades como:</p>
-      <ul>
-        <li>Universidad Nacional</li>
-        <li>Universidad de los Andes</li>
-        <li>Universidad Santo Tomás</li>
-        <li>Universidad del Cauca</li>
-        <li>UFPS</li>
-      </ul>
+      <button class="subtitle" onclick="openModal('m5')">Ver información</button>
     </div>
     <!-- 6 -->
     <div class="slide">
-      <h1>🎓 Grado de Miembro Estudiantil</h1>
-      <p>Un miembro estudiantil debe estar cursando al menos el 50% de un programa académico regular de tiempo completo, como estudiante de pregrado registrado en un programa formal en áreas designadas por IEEE. El tiempo máximo, incluyendo la de posgrado, es de <b>8 años</b>.</p>
-    </div>
-    <!-- 7 -->
-    <div class="slide">
-      <h1>🧑‍🎓 Grado de Miembro de Posgrado</h1>
-      <p>Un miembro de posgrado debe estar inscrito en al menos el 50% de un programa académico de tiempo completo en un área reconocida por IEEE. El límite acumulado es de <b>8 años</b>.</p>
-    </div>
-    <!-- 8 -->
-    <div class="slide">
-      <h1>⚙️ Miembro Asociado</h1>
-      <p>Diseñado para personas técnicas y no técnicas que no cumplen con los requisitos de miembro completo, pero desean acceder a beneficios IEEE. También aplica para quienes avanzan hacia la calificación de miembro mediante educación continua o experiencia laboral.</p>
-    </div>
-    <!-- 9 -->
-    <div class="slide">
-      <h1>👥 Miembro</h1>
-      <p>El grado de miembro está reservado a quienes cumplen requisitos educativos o experiencia profesional en los campos IEEE. Se puede obtener por:</p>
-      <ul>
-        <li>Título universitario (3 a 5 años o más) en un campo IEEE</li>
-        <li>Título universitario + 3 años de experiencia profesional</li>
-        <li>Al menos 6 años de experiencia profesional demostrada en campos IEEE</li>
-      </ul>
-    </div>
-    <!-- 10 -->
-    <div class="slide">
-      <h1>⭐ Otros grados profesionales</h1>
-      <ul>
-        <li>Miembro Senior</li>
-        <li>Miembro Fellow</li>
-        <li>Miembro Vitalicio</li>
-      </ul>
+      <h1>📘 Tipos de Membresía</h1>
+      <small>La siguiente información corresponde a las calificaciones para los diferentes grados de membresía del IEEE.</small>
+      <button class="subtitle" onclick="openModal('m6')">🎓 Estudiantil</button>
+      <button class="subtitle" onclick="openModal('m7')">🧑‍🎓 Posgrado</button>
+      <button class="subtitle" onclick="openModal('m8')">⚙️ Asociado</button>
+      <button class="subtitle" onclick="openModal('m9')">👥 Miembro</button>
+      <button class="subtitle" onclick="openModal('m10')">⭐ Otros grados</button>
     </div>
 
     <div class="controls">
-      <button onclick="prevSlide()">⏮️ Atrás</button>
-      <button onclick="nextSlide()">⏭️ Siguiente</button>
+      <button class="nav" onclick="prevSlide()">⏮️ Atrás</button>
+      <button class="nav" onclick="nextSlide()">⏭️ Siguiente</button>
     </div>
     <div class="progress">
       <div class="progress-bar" id="progress"></div>
     </div>
   </div>
+
+  <!-- Modales -->
+  <div id="m1" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('m1')">&times;</span><h2>¿Qué es IEEE?</h2><p>IEEE es la mayor organización profesional técnica del mundo, dedicada al avance de la innovación en ingeniería, computación y tecnología para el beneficio global.</p></div></div>
+
+  <div id="m2" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('m2')">&times;</span><h2>¿Quiénes pueden afiliarse?</h2><p>Pueden afiliarse estudiantes de pregrado o posgrado en instituciones reconocidas en áreas como Ingeniería, Ciencias de la computación, Tecnología aplicada, etc. No se requiere experiencia previa.</p></div></div>
+
+  <div id="m3" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('m3')">&times;</span><h2>Proceso de inscripción</h2><ul><li>Crear cuenta en ieee.org</li><li>Seleccionar “Join IEEE”</li><li>Elegir membresía “Student”</li><li>Ingresar datos académicos</li><li>Confirmar afiliación y pago</li><li>Recibir confirmación por correo</li></ul></div></div>
+
+  <div id="m4" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('m4')">&times;</span><h2>Beneficios clave</h2><ul><li>Acceso a publicaciones y estándares IEEE</li><li>Participación en capítulos técnicos</li><li>Networking internacional</li><li>Liderazgo estudiantil</li><li>Descuentos en eventos y certificaciones</li></ul></div></div>
+
+  <div id="m5" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('m5')">&times;</span><h2>Presencia en Colombia</h2><p>IEEE tiene ramas estudiantiles en la Universidad Nacional, Los Andes, Santo Tomás, del Cauca, UFPS, entre otras.</p></div></div>
+
+  <div id="m6" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('m6')">&times;</span><h2>Miembro Estudiantil</h2><p>Debe cursar al menos el 50% de un programa de pregrado a tiempo completo en áreas IEEE. Máximo 8 años acumulados (incluyendo posgrado).</p></div></div>
+
+  <div id="m7" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('m7')">&times;</span><h2>Miembro de Posgrado</h2><p>Debe estar inscrito en al menos el 50% de un programa de posgrado en áreas IEEE. Límite total: 8 años.</p></div></div>
+
+  <div id="m8" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('m8')">&times;</span><h2>Miembro Asociado</h2><p>Para personas técnicas o no técnicas que no cumplen requisitos de miembro completo, pero desean beneficiarse de IEEE o avanzar con educación continua.</p></div></div>
+
+  <div id="m9" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('m9')">&times;</span><h2>Miembro</h2><p>Requiere:</p><ul><li>Título universitario acreditado en áreas IEEE.</li><li>Título + 3 años de experiencia profesional.</li><li>O 6 años de experiencia profesional en campos IEEE.</li></ul></div></div>
+
+  <div id="m10" class="modal"><div class="modal-content"><span class="close" onclick="closeModal('m10')">&times;</span><h2>Otros grados</h2><ul><li>Miembro Senior</li><li>Miembro Fellow</li><li>Miembro Vitalicio</li></ul></div></div>
 
   <script>
     const slides = document.querySelectorAll('.slide');
@@ -194,15 +207,20 @@
       });
       progressBar.style.width = ((index + 1) / slides.length) * 100 + '%';
     }
-
     function nextSlide() {
       current = (current + 1) % slides.length;
       showSlide(current);
     }
-
     function prevSlide() {
       current = (current - 1 + slides.length) % slides.length;
       showSlide(current);
+    }
+
+    function openModal(id) {
+      document.getElementById(id).style.display = 'flex';
+    }
+    function closeModal(id) {
+      document.getElementById(id).style.display = 'none';
     }
 
     showSlide(current);
